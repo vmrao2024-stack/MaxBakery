@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Max Bakers — cakes baked for every chapter of life. Explore cakes, occasions, gallery and order through WhatsApp.">
+  <title>Max Bakers | Baked for Every Chapter of Life</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Allura&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cream:#fbf5ec;
+      --paper:#fffaf3;
+      --brown:#3b2015;
+      --brown2:#5a3020;
+      --gold:#b77b3e;
+      --peach:#f4dfcf;
+      --pink:#f8e9df;
+      --green:#16834c;
+      --line:rgba(59,32,21,.14);
+      --shadow:0 18px 50px rgba(59,32,21,.10);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--brown);
+      font-family:"DM Sans",Arial,sans-serif;
+      line-height:1.6;
+    }
+    img{display:block;width:100%;object-fit:cover}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(1180px,92%);margin:auto}
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.72rem;
+      font-weight:700;
+      color:var(--gold);
+    }
+    h1,h2,h3{font-family:"Playfair Display",serif;line-height:1.05;margin:0}
+    h2{font-size:clamp(2.1rem,4vw,3.5rem)}
+    .script{font-family:Allura,cursive;font-size:2rem;color:var(--gold)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border:1px solid var(--brown);border-radius:999px;padding:13px 21px;
+      font-weight:700;font-size:.82rem;letter-spacing:.03em;cursor:pointer;
+      transition:.25s ease;background:transparent;color:var(--brown);
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(59,32,21,.12)}
+    .btn-dark{background:var(--brown);color:#fff;border-color:var(--brown)}
+    .btn-green{background:var(--green);color:#fff;border-color:var(--green)}
+    .btn-small{padding:9px 14px;font-size:.72rem}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(255,250,243,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    }
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand-mark{
+      width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;
+      display:grid;place-items:center;color:var(--gold);font-family:serif;font-weight:700;
+    }
+    .brand-name{font-family:"Playfair Display",serif;font-size:1.25rem;letter-spacing:.03em}
+    .brand-tag{display:block;font-family:Allura,cursive;color:var(--gold);font-size:1rem;line-height:1}
+    nav{display:flex;gap:24px;font-size:.76rem;font-weight:700}
+    nav a{opacity:.82}
+    nav a:hover{color:var(--gold);opacity:1}
+    .mobile-menu{display:none}
+
+    /* Hero */
+    .hero{
+      min-height:610px;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;
+      overflow:hidden;background:linear-gradient(90deg,#fff9f1 0%,#f8e9da 45%,#e8d0bd 100%);
+    }
+    .hero-copy{padding:70px 0 70px max(4vw,calc((100vw - 1180px)/2))}
+    .hero h1{font-size:clamp(3.2rem,6vw,5.8rem);max-width:690px;margin:13px 0 22px}
+    .hero p{max-width:560px;font-size:1.02rem;color:#674c3d}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .hero-image{height:610px;position:relative}
+    .hero-image img{height:100%;filter:saturate(.95)}
+    .hero-image:after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(255,249,241,.55),transparent 25%);
+      pointer-events:none;
+    }
+    .music{
+      position:absolute;right:24px;bottom:22px;z-index:2;background:rgba(59,32,21,.8);
+      color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:50%;
+      width:44px;height:44px;cursor:pointer
+    }
+
+    /* Story */
+    section{padding:92px 0}
+    .story{background:var(--paper)}
+    .story-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center}
+    .photo-stack{position:relative;min-height:500px}
+    .photo{position:absolute;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:8px solid #fff}
+    .photo.one{width:55%;height:420px;left:0;top:25px;transform:rotate(-3deg)}
+    .photo.two{width:48%;height:300px;right:2%;top:0;transform:rotate(3deg)}
+    .photo.three{width:53%;height:340px;right:5%;bottom:0;transform:rotate(-2deg)}
+    .story-copy p{color:#6a5042}
+    .timeline{margin-top:28px;border-left:1px solid var(--line);padding-left:25px}
+    .timeline-item{position:relative;margin:0 0 19px}
+    .timeline-item:before{
+      content:"";position:absolute;left:-31px;top:6px;width:11px;height:11px;
+      border-radius:50%;background:var(--gold);border:4px solid var(--paper)
+    }
+    .timeline-item strong{display:block;font-family:"Playfair Display",serif;font-size:1.1rem}
+    .timeline-item span{font-size:.8rem;color:#826858}
+
+    /* Occasions */
+    .section-head{text-align:center;max-width:700px;margin:0 auto 45px}
+    .section-head p{color:#765b4b}
+    .occasion-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:13px}
+    .occasion{
+      background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+      transition:.25s;box-shadow:0 8px 25px rgba(59,32,21,.04)
+    }
+    .occasion:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .occasion img{height:135px}
+    .occasion-body{padding:14px 12px 16px;text-align:center}
+    .occasion h3{font-size:1.05rem}
+    .occasion p{font-size:.72rem;color:#765b4b;margin:7px 0 0}
+
+    /* Cakes */
+    .cake-section{background:#fffaf4}
+    .cake-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:15px}
+    .cake-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+    .cake-card img{height:210px}
+    .cake-body{padding:13px}
+    .cake-body h3{font-size:1.12rem}
+    .price{font-size:.8rem;color:#8a674f;margin:5px 0 12px}
+    .cake-actions{display:flex;gap:6px}
+
+    .custom{
+      margin-top:28px;border-radius:24px;overflow:hidden;min-height:300px;
+      display:grid;grid-template-columns:1.2fr 1fr;background:#f1dccd;
+    }
+    .custom-copy{padding:45px}
+    .custom-image img{height:100%}
+
+    /* Instagram */
+    .instagram{background:linear-gradient(135deg,#f9e8de,#fff8f0)}
+    .ig-layout{display:grid;grid-template-columns:.65fr 1.35fr;gap:35px;align-items:center}
+    .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .ig-grid a{overflow:hidden;border-radius:16px;aspect-ratio:1}
+    .ig-grid img{height:100%;transition:.3s}
+    .ig-grid a:hover img{transform:scale(1.05)}
+
+    /* Order */
+    .order{background:#fff}
+    .order-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:35px}
+    .order-card,.visit-card{border-radius:24px;background:#fbf5ec;padding:35px;border:1px solid var(--line)}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+    .full{grid-column:1/-1}
+    label{font-size:.72rem;font-weight:700;display:block;margin-bottom:5px}
+    input,select,textarea{
+      width:100%;border:1px solid #dcc9ba;background:#fff;border-radius:10px;padding:12px;
+      color:var(--brown);outline:none
+    }
+    textarea{min-height:105px;resize:vertical}
+    input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+    .visit-card{background:var(--brown);color:#fff}
+    .visit-card p{color:#e8d9ce}
+    .visit-list{list-style:none;padding:0;margin:25px 0}
+    .visit-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+    .map{
+      margin-top:20px;border-radius:16px;overflow:hidden;height:190px;
+      background:linear-gradient(135deg,#ead8c9,#c9aa91);display:grid;place-items:center;
+      color:#5a3929;font-family:"Playfair Display",serif;font-size:1.3rem
+    }
+
+    /* Footer */
+    footer{background:#29150e;color:#fff;padding:45px 0 20px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+    footer p,footer a{color:#d8c6ba;font-size:.84rem}
+    .footer-links{display:grid;gap:8px}
+    .copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:18px;font-size:.72rem;color:#bfa99b}
+
+    .whatsapp-float{
+      position:fixed;right:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:50%;
+      display:grid;place-items:center;background:var(--green);color:#fff;
+      box-shadow:0 12px 35px rgba(0,0,0,.22);font-size:1.35rem
+    }
+
+    @media(max-width:1000px){
+      nav{display:none}.mobile-menu{display:block;border:0;background:none;font-size:1.5rem}
+      .hero{grid-template-columns:1fr}.hero-copy{padding:75px 5%}.hero-image{height:440px}
+      .occasion-grid{grid-template-columns:repeat(4,1fr)}
+      .cake-grid{grid-template-columns:repeat(3,1fr)}
+      .story-grid,.order-grid,.ig-layout{grid-template-columns:1fr}
+      .photo-stack{min-height:520px}
+    }
+    @media(max-width:620px){
+      section{padding:65px 0}
+      .brand-name{font-size:1rem}.brand-tag{font-size:.85rem}
+      .hero h1{font-size:3.1rem}.hero-image{height:330px}
+      .occasion-grid{grid-template-columns:repeat(2,1fr)}
+      .cake-grid{grid-template-columns:repeat(2,1fr)}
+      .cake-card img{height:170px}
+      .custom{grid-template-columns:1fr}.custom-image{height:260px}.custom-copy{padding:30px}
+      .ig-grid{gap:6px}.photo-stack{min-height:450px}
+      .photo.one{height:330px}.photo.two{height:240px}.photo.three{height:270px}
+      form{grid-template-columns:1fr}.full{grid-column:auto}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand" aria-label="Max Bakers home">
+      <span class="brand-mark">MB</span>
+      <span>
+        <span class="brand-name">MAX BAKERS</span>
+        <span class="brand-tag">Baked for Your Moments</span>
+      </span>
+    </a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#story">Our Story</a>
+      <a href="#cakes">Cakes</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-green btn-small" href="#order">Order on WhatsApp</a>
+    <button class="mobile-menu" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-copy">
+      <div class="eyebrow">Sweet memories · freshly baked</div>
+      <h1>Baked for Every Chapter of Life</h1>
+      <p>
+        From the excitement of a school birthday to anniversaries, weddings,
+        milestones and celebrations with family — Max Bakers makes every sweet
+        moment memorable.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#order">Order Your Cake →</a>
+        <a class="btn" href="#cakes">Explore Our Cakes →</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1500&q=85" alt="Elegant celebration cake">
+      <button class="music" id="musicBtn" title="Toggle music" onclick="toggleMusic()">♪</button>
+      <audio id="music" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946f4e5f7e.mp3?filename=coffee-shop-ambience-116376.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="container story-grid">
+      <div class="photo-stack">
+        <div class="photo one"><img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=800&q=80" alt="Birthday celebration"></div>
+        <div class="photo two"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Wedding celebration"></div>
+        <div class="photo three"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80" alt="Family celebration"></div>
+      </div>
+      <div class="story-copy">
+        <div class="eyebrow">About us</div>
+        <h2>A Journey That Grows With You</h2>
+        <p>
+          Every journey begins with a small celebration. Maybe it was a birthday
+          cake for a school-age child, a cake shared with friends after an
+          achievement, a first anniversary, a wedding, or a family gathering
+          where generations sit around the same table.
+        </p>
+        <p>
+          At Max Bakers, we believe a cake is more than dessert.
+          <strong>It becomes part of the memory.</strong>
+        </p>
+        <p>
+          From childhood celebrations to life's milestones and cherished senior
+          years, we want to be part of every chapter.
+        </p>
+        <div class="script">One cake. One celebration. One memory at a time.</div>
+        <div class="timeline">
+          <div class="timeline-item"><strong>Childhood</strong><span>First smiles & little celebrations</span></div>
+          <div class="timeline-item"><strong>School Days</strong><span>Big dreams and birthday wishes</span></div>
+          <div class="timeline-item"><strong>Young Love</strong><span>Sweet beginnings</span></div>
+          <div class="timeline-item"><strong>Family</strong><span>Shared moments</span></div>
+          <div class="timeline-item"><strong>Milestones</strong><span>Achievements worth celebrating</span></div>
+          <div class="timeline-item"><strong>Generations</strong><span>Memories that stay</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="occasions">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Choose the moment</div>
+        <h2>Cakes for Every Occasion</h2>
+        <p>Whatever the reason, there is always room for a little sweetness.</p>
+      </div>
+      <div class="occasion-grid">
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Birthdays</h3><p>From little ones to milestone birthdays.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Anniversaries</h3><p>Celebrate the journey you've shared.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1464195244916-405fa0a82545?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Weddings</h3><p>Beautiful beginnings.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1507494924047-60b8ee826ca9?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Achievements</h3><p>Graduations, promotions and milestones.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Baby Celebrations</h3><p>Baby showers and first birthdays.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Family</h3><p>Every generation deserves a sweet moment.</p></div></article>
+        <article class="occasion"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80"><div class="occasion-body"><h3>Just Because</h3><p>Sometimes no occasion is needed.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cake-section" id="cakes">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Our cake collection</div>
+        <h2>Find Your Perfect Cake</h2>
+      </div>
+      <div class="cake-grid">
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Classic Vanilla</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Chocolate Fudge</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Red Velvet</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Photo Cake</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Kids Theme Cake</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+        <article class="cake-card"><img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=700&q=80"><div class="cake-body"><h3>Designer Cake</h3><div class="price">Ask for current price</div><div class="cake-actions"><a class="btn btn-small" href="#order">Customize</a><a class="btn btn-dark btn-small" href="#order">Order</a></div></div></article>
+      </div>
+
+      <div class="custom">
+        <div class="custom-copy">
+          <div class="eyebrow">Made for you</div>
+          <h2>You Imagine It.<br>We Bake It.</h2>
+          <p>Have a design in mind? Send your inspiration, photograph or idea and let's create something made especially for your celebration.</p>
+          <a class="btn btn-dark" href="#order">Send Your Design →</a>
+        </div>
+        <div class="custom-image">
+          <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1000&q=85" alt="Custom celebration cake">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="instagram" id="instagram">
+    <div class="container ig-layout">
+      <div>
+        <div class="eyebrow">Fresh from our Instagram</div>
+        <h2>See What's Baking Today</h2>
+        <p>Follow Max Bakers for the latest creations, celebrations and special moments.</p>
+        <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/">Follow us on Instagram ↗</a>
+      </div>
+      <div class="ig-grid" id="gallery">
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80" alt="Bakery creation"></a>
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Cake"></a>
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=600&q=80" alt="Celebration cake"></a>
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=600&q=80" alt="Dessert"></a>
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Cupcakes"></a>
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80" alt="Birthday cake"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <div class="container order-grid">
+      <div class="order-card">
+        <div class="eyebrow">Quick order on WhatsApp</div>
+        <h2>Start Your Celebration Here</h2>
+        <p>Fill in the details and the website will prepare a WhatsApp message for you.</p>
+
+        <form id="orderForm">
+          <div><label>Name *</label><input id="name" required placeholder="Your name"></div>
+          <div><label>Mobile Number *</label><input id="phone" required placeholder="Your mobile"></div>
+          <div><label>Preferred Date *</label><input id="date" type="date" required></div>
+          <div><label>Preferred Time *</label><input id="time" type="time" required></div>
+          <div><label>Cake / Design *</label><input id="cake" required placeholder="Cake or design"></div>
+          <div><label>Occasion</label><select id="occasion"><option>Birthday</option><option>Anniversary</option><option>Wedding</option><option>Achievement</option><option>Baby Celebration</option><option>Family Celebration</option><option>Other</option></select></div>
+          <div><label>Delivery / Pickup</label><select id="mode"><option>Pickup</option><option>Delivery</option></select></div>
+          <div><label>Quantity</label><select id="qty"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+          <div class="full"><label>Address</label><input id="address" placeholder="Delivery address, if required"></div>
+          <div class="full"><label>Message / Special Requirements</label><textarea id="message" placeholder="Theme, name on cake, flavour, message, etc."></textarea></div>
+          <div class="full"><button class="btn btn-green" type="submit">Send Order on WhatsApp →</button></div>
+        </form>
+      </div>
+
+      <aside class="visit-card" id="contact">
+        <div class="eyebrow">Come visit us</div>
+        <h2>Max Bakers<br>Sector 10</h2>
+        <p>Visit the store, explore today's creations and speak with our team about your celebration.</p>
+        <ul class="visit-list">
+          <li>📍 Sector 10 — update exact store address</li>
+          <li>📞 Add your store phone number</li>
+          <li>💬 WhatsApp ordering available</li>
+          <li>🕐 Add current store timings</li>
+        </ul>
+        <a class="btn" style="background:#fff;color:#3b2015;border-color:#fff" target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/">View Instagram ↗</a>
+        <div class="map">Your Google Maps location</div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<a class="whatsapp-float" href="#order" aria-label="Order on WhatsApp">◉</a>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="brand">
+        <span class="brand-mark" style="color:#e5b277;border-color:#e5b277">MB</span>
+        <span><span class="brand-name" style="color:#fff">MAX BAKERS</span><span class="brand-tag">Baked for Your Moments</span></span>
+      </div>
+      <p>From childhood birthdays to family milestones — one cake, one celebration, one memory at a time.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Explore</div>
+      <div class="footer-links">
+        <a href="#story">Our Story</a><a href="#cakes">Cakes</a><a href="#occasions">Occasions</a><a href="#gallery">Gallery</a>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Connect</div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/maxbakerssector10/" target="_blank" rel="noopener">Instagram</a>
+        <a href="#order">WhatsApp Order</a>
+        <a href="#contact">Visit Store</a>
+      </div>
+    </div>
+  </div>
+  <div class="container copyright">© <span id="year"></span> Max Bakers. All rights reserved.</div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function toggleMenu(){
+    const nav=document.querySelector("nav");
+    const open=nav.style.display==="flex";
+    nav.style.display=open?"none":"flex";
+    if(!open){
+      nav.style.position="absolute"; nav.style.top="76px"; nav.style.left="0"; nav.style.right="0";
+      nav.style.background="#fffaf3"; nav.style.padding="20px 5%"; nav.style.flexDirection="column";
+      nav.style.borderBottom="1px solid rgba(59,32,21,.14)";
+    }
+  }
+
+  async function toggleMusic(){
+    const audio=document.getElementById("music");
+    const btn=document.getElementById("musicBtn");
+    try{
+      if(audio.paused){ await audio.play(); btn.textContent="Ⅱ"; btn.title="Pause music"; }
+      else{ audio.pause(); btn.textContent="♪"; btn.title="Play music"; }
+    }catch(e){
+      alert("Your browser blocked the music. Tap the button again to start it.");
+    }
+  }
+
+  document.getElementById("orderForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      date: document.getElementById("date").value,
+      time: document.getElementById("time").value,
+      cake: document.getElementById("cake").value,
+      occasion: document.getElementById("occasion").value,
+      mode: document.getElementById("mode").value,
+      qty: document.getElementById("qty").value,
+      address: document.getElementById("address").value,
+      message: document.getElementById("message").value
+    };
+
+    const text =
+`Hi Max Bakers, I'd like to place a cake enquiry/order.
+
+Name: ${data.name}
+Mobile: ${data.phone}
+Cake / Design: ${data.cake}
+Occasion: ${data.occasion}
+Date: ${data.date}
+Time: ${data.time}
+Delivery / Pickup: ${data.mode}
+Quantity: ${data.qty}
+Address: ${data.address || "N/A"}
+Special Requirements: ${data.message || "N/A"}`;
+
+    // Opens WhatsApp with the completed message. The customer can select the Max Bakers chat.
+    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+  });
+</script>
+</body>
+</html>
