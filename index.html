@@ -148,6 +148,123 @@
     .custom-copy{padding:45px}
     .custom-image img{height:100%}
 
+    /* Flipbook Gallery Block */
+    .gallery-block{
+      background:linear-gradient(180deg, var(--paper) 0%, var(--pink) 50%, var(--paper) 100%);
+      padding:90px 0;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .flipbook-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      margin-top:25px;
+    }
+    .flipbook-frame{
+      width:100%;
+      max-width:840px;
+      height:500px;
+      position:relative;
+    }
+    #gallery-flipbook{
+      box-shadow:0 25px 50px -10px rgba(59,32,21,.2);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .fb-page{
+      background-color:var(--paper);
+      border:1px solid #e2d2c3;
+      box-shadow:inset 0 0 25px rgba(59,32,21,0.05);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px;
+      box-sizing:border-box;
+    }
+    .fb-page.cover-front{
+      background:linear-gradient(135deg, var(--brown) 0%, var(--brown2) 100%);
+      color:#fff;
+      border:2px solid var(--gold);
+      text-align:center;
+      justify-content:center;
+      padding:30px;
+    }
+    .fb-page.cover-front h3{
+      font-family:"Playfair Display",serif;
+      font-size:2.2rem;
+      color:var(--cream);
+      margin:10px 0;
+    }
+    .fb-page.cover-back{
+      background:linear-gradient(135deg, var(--brown2) 0%, var(--brown) 100%);
+      color:#fff;
+      text-align:center;
+      justify-content:center;
+      padding:30px;
+    }
+    .fb-img-wrapper{
+      width:100%;
+      height:82%;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 6px 16px rgba(59,32,21,.12);
+      border:4px solid #fff;
+    }
+    .fb-img-wrapper img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .fb-caption{
+      text-align:center;
+      padding-top:8px;
+    }
+    .fb-caption h4{
+      font-family:"Playfair Display",serif;
+      font-size:1.05rem;
+      margin:0;
+      color:var(--brown);
+    }
+    .fb-caption span{
+      font-size:.7rem;
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:700;
+    }
+    .fb-nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin-top:25px;
+    }
+    .fb-nav button{
+      background:var(--brown);
+      color:#fff;
+      border:none;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:1.2rem;
+      transition:.25s ease;
+      display:grid;
+      place-items:center;
+    }
+    .fb-nav button:hover{
+      background:var(--gold);
+      transform:scale(1.08);
+    }
+    .fb-info{
+      font-size:.8rem;
+      color:var(--brown2);
+      font-style:italic;
+      opacity:.85;
+    }
+
     /* Instagram */
     .instagram{background:linear-gradient(135deg,#f9e8de,#fff8f0)}
     .ig-layout{display:grid;grid-template-columns:.65fr 1.35fr;gap:35px;align-items:center}
@@ -172,12 +289,13 @@
     .visit-card{background:var(--brown);color:#fff}
     .visit-card p{color:#e8d9ce}
     .visit-list{list-style:none;padding:0;margin:25px 0}
-    .visit-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+    .visit-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:.88rem;line-height:1.5}
+    .visit-list a{color:#fff;text-decoration:underline}
     .map{
       margin-top:20px;border-radius:16px;overflow:hidden;height:190px;
-      background:linear-gradient(135deg,#ead8c9,#c9aa91);display:grid;place-items:center;
-      color:#5a3929;font-family:"Playfair Display",serif;font-size:1.3rem
+      border:1px solid rgba(255,255,255,.2);
     }
+    .map iframe{width:100%;height:100%;border:0}
 
     /* Footer */
     footer{background:#29150e;color:#fff;padding:45px 0 20px}
@@ -199,6 +317,7 @@
       .cake-grid{grid-template-columns:repeat(3,1fr)}
       .story-grid,.order-grid,.ig-layout{grid-template-columns:1fr}
       .photo-stack{min-height:520px}
+      .flipbook-frame{height:420px}
     }
     @media(max-width:620px){
       section{padding:65px 0}
@@ -212,6 +331,7 @@
       .photo.one{height:330px}.photo.two{height:240px}.photo.three{height:270px}
       form{grid-template-columns:1fr}.full{grid-column:auto}
       .footer-grid{grid-template-columns:1fr}
+      .flipbook-frame{height:350px}
     }
   </style>
 </head>
@@ -235,7 +355,7 @@
       <a href="#instagram">Instagram</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn btn-green btn-small" href="#order">Order on WhatsApp</a>
+    <a class="btn btn-green btn-small" href="https://wa.me/919039848110" target="_blank" rel="noopener">Order on WhatsApp</a>
     <button class="mobile-menu" aria-label="Open menu" onclick="toggleMenu()">☰</button>
   </div>
 </header>
@@ -349,6 +469,101 @@
     </div>
   </section>
 
+  <!-- Gallery Block with StPageFlip Flipbook -->
+  <section class="gallery-block" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Interactive Lookbook</div>
+        <h2>Our Cake Gallery</h2>
+        <p>Flip through the pages of our favorite baked masterpieces.</p>
+      </div>
+
+      <div class="flipbook-container">
+        <div class="flipbook-frame">
+          <div id="gallery-flipbook">
+            <!-- Cover Front -->
+            <div class="fb-page cover-front">
+              <span class="eyebrow" style="color:var(--gold);">Max Bakers</span>
+              <h3>Celebration Lookbook</h3>
+              <div class="script">Freshly Baked Gallery</div>
+              <p style="font-size:.8rem; opacity:.85; margin-top:20px;">Click edge or swipe to flip pages</p>
+            </div>
+
+            <!-- Page 1 -->
+            <div class="fb-page">
+              <div class="fb-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80" alt="Bakery creation">
+              </div>
+              <div class="fb-caption">
+                <span>Artisanal Bake</span>
+                <h4>Specialty Pastry</h4>
+              </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="fb-page">
+              <div class="fb-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Vanilla Cake">
+              </div>
+              <div class="fb-caption">
+                <span>Signature Collection</span>
+                <h4>Berry Vanilla Delight</h4>
+              </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="fb-page">
+              <div class="fb-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=800&q=80" alt="Celebration cake">
+              </div>
+              <div class="fb-caption">
+                <span>Birthday Favorite</span>
+                <h4>Pastel Theme Cake</h4>
+              </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="fb-page">
+              <div class="fb-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=800&q=80" alt="Dessert">
+              </div>
+              <div class="fb-caption">
+                <span>Sweet Treats</span>
+                <h4>Gourmet Dessert Plate</h4>
+              </div>
+            </div>
+
+            <!-- Page 5 -->
+            <div class="fb-page">
+              <div class="fb-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80" alt="Cupcakes">
+              </div>
+              <div class="fb-caption">
+                <span>Party Delights</span>
+                <h4>Assorted Cupcakes</h4>
+              </div>
+            </div>
+
+            <!-- Cover Back -->
+            <div class="fb-page cover-back">
+              <span class="eyebrow" style="color:var(--gold);">Max Bakers</span>
+              <h3>Made For You</h3>
+              <p style="font-size:.85rem; color:#e8d9ce; margin-bottom:20px;">Ready to create your custom design?</p>
+              <a class="btn btn-green btn-small" href="#order">Order on WhatsApp →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flipbook Controls -->
+        <div class="fb-nav">
+          <button id="fb-prev-btn" aria-label="Previous Page">‹</button>
+          <span class="fb-info">Flip pages with buttons or drag corners</span>
+          <button id="fb-next-btn" aria-label="Next Page">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="instagram" id="instagram">
     <div class="container ig-layout">
       <div>
@@ -357,7 +572,7 @@
         <p>Follow Max Bakers for the latest creations, celebrations and special moments.</p>
         <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/">Follow us on Instagram ↗</a>
       </div>
-      <div class="ig-grid" id="gallery">
+      <div class="ig-grid">
         <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80" alt="Bakery creation"></a>
         <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Cake"></a>
         <a target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/"><img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=600&q=80" alt="Celebration cake"></a>
@@ -381,6 +596,7 @@
           <div><label>Preferred Date *</label><input id="date" type="date" required></div>
           <div><label>Preferred Time *</label><input id="time" type="time" required></div>
           <div><label>Cake / Design *</label><input id="cake" required placeholder="Cake or design"></div>
+          <div><label>Weight *</label><select id="weight"><option>1 Pound</option><option>2 Pound</option><option>4 Pound</option><option>5 Pound</option><option>10 Pound</option><option>Custom / More</option></select></div>
           <div><label>Occasion</label><select id="occasion"><option>Birthday</option><option>Anniversary</option><option>Wedding</option><option>Achievement</option><option>Baby Celebration</option><option>Family Celebration</option><option>Other</option></select></div>
           <div><label>Delivery / Pickup</label><select id="mode"><option>Pickup</option><option>Delivery</option></select></div>
           <div><label>Quantity</label><select id="qty"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
@@ -392,22 +608,28 @@
 
       <aside class="visit-card" id="contact">
         <div class="eyebrow">Come visit us</div>
-        <h2>Max Bakers<br>Sector 10</h2>
-        <p>Visit the store, explore today's creations and speak with our team about your celebration.</p>
+        <h2>Max Bakers The Factory Outlet</h2>
+        <p>Visit our outlet, explore today's creations and speak with our team about your custom cake.</p>
         <ul class="visit-list">
-          <li>📍 Sector 10 — update exact store address</li>
-          <li>📞 Add your store phone number</li>
-          <li>💬 WhatsApp ordering available</li>
-          <li>🕐 Add current store timings</li>
+          <li>📍 258, Zonal Market, Sector 10, Bhilai, Chhattisgarh 490006</li>
+          <li>📞 <a href="tel:+919039848110">+91 90398 48110</a></li>
+          <li>💬 WhatsApp: <a href="https://wa.me/919039848110" target="_blank" rel="noopener">+91 90398 48110</a></li>
+          <li>🕐 Open Everyday: 9:00 AM – 10:00 PM</li>
         </ul>
         <a class="btn" style="background:#fff;color:#3b2015;border-color:#fff" target="_blank" rel="noopener" href="https://www.instagram.com/maxbakerssector10/">View Instagram ↗</a>
-        <div class="map">Your Google Maps location</div>
+        <div class="map">
+          <iframe 
+            src="https://maps.google.com/maps?q=Max%20Bakers%20The%20Factory%20Outlet%20Sector%2010%20Bhilai&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            loading="lazy" 
+            title="Max Bakers Location">
+          </iframe>
+        </div>
       </aside>
     </div>
   </section>
 </main>
 
-<a class="whatsapp-float" href="#order" aria-label="Order on WhatsApp">◉</a>
+<a class="whatsapp-float" href="https://wa.me/919039848110" target="_blank" rel="noopener" aria-label="Order on WhatsApp">◉</a>
 
 <footer>
   <div class="container footer-grid">
@@ -428,13 +650,16 @@
       <div class="eyebrow">Connect</div>
       <div class="footer-links">
         <a href="https://www.instagram.com/maxbakerssector10/" target="_blank" rel="noopener">Instagram</a>
-        <a href="#order">WhatsApp Order</a>
+        <a href="https://wa.me/919039848110" target="_blank" rel="noopener">WhatsApp Order</a>
         <a href="#contact">Visit Store</a>
       </div>
     </div>
   </div>
   <div class="container copyright">© <span id="year"></span> Max Bakers. All rights reserved.</div>
 </footer>
+
+<!-- StPageFlip Library CDN -->
+<script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -461,6 +686,32 @@
     }
   }
 
+  // Initialize Gallery Flipbook
+  document.addEventListener('DOMContentLoaded', function() {
+    const pageFlip = new St.PageFlip(document.getElementById('gallery-flipbook'), {
+      width: 420,
+      height: 500,
+      size: "stretch",
+      minWidth: 280,
+      maxWidth: 450,
+      minHeight: 350,
+      maxHeight: 520,
+      maxShadowOpacity: 0.3,
+      showCover: true,
+      mobileScrollSupport: false
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll('.fb-page'));
+
+    document.getElementById('fb-prev-btn').addEventListener('click', () => {
+      pageFlip.flipPrev();
+    });
+
+    document.getElementById('fb-next-btn').addEventListener('click', () => {
+      pageFlip.flipNext();
+    });
+  });
+
   document.getElementById("orderForm").addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -470,6 +721,7 @@
       date: document.getElementById("date").value,
       time: document.getElementById("time").value,
       cake: document.getElementById("cake").value,
+      weight: document.getElementById("weight").value,
       occasion: document.getElementById("occasion").value,
       mode: document.getElementById("mode").value,
       qty: document.getElementById("qty").value,
@@ -483,6 +735,7 @@
 Name: ${data.name}
 Mobile: ${data.phone}
 Cake / Design: ${data.cake}
+Weight: ${data.weight}
 Occasion: ${data.occasion}
 Date: ${data.date}
 Time: ${data.time}
@@ -491,8 +744,8 @@ Quantity: ${data.qty}
 Address: ${data.address || "N/A"}
 Special Requirements: ${data.message || "N/A"}`;
 
-    // Opens WhatsApp with the completed message. The customer can select the Max Bakers chat.
-    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+    // Direct WhatsApp message to Max Bakers (9039848110)
+    window.open("https://wa.me/919039848110?text=" + encodeURIComponent(text), "_blank");
   });
 </script>
 </body>
