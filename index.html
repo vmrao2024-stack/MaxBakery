@@ -64,10 +64,14 @@
       backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
     }
     .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand-mark{
-      width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;
-      display:grid;place-items:center;color:var(--gold);font-family:serif;font-weight:700;
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-logo{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1.5px solid var(--gold);
+      box-shadow:0 2px 8px rgba(59,32,21,0.12);
     }
     .brand-name{font-family:"Playfair Display",serif;font-size:1.25rem;letter-spacing:.03em}
     .brand-tag{display:block;font-family:Allura,cursive;color:var(--gold);font-size:1rem;line-height:1}
@@ -191,6 +195,13 @@
       text-align:center;
       justify-content:center;
       padding:30px;
+    }
+    .fb-page.cover-front .fb-logo{
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      border:2px solid var(--gold);
+      margin:0 auto 12px;
     }
     .fb-page.cover-front h3{
       font-family:"Playfair Display",serif;
@@ -340,10 +351,10 @@
 <header>
   <div class="container nav">
     <a href="#home" class="brand" aria-label="Max Bakers home">
-      <span class="brand-mark">MB</span>
+      <img src="logo.jpg" alt="Max Bakers Logo" class="brand-logo">
       <span>
         <span class="brand-name">MAX BAKERS</span>
-        <span class="brand-tag">Baked for Your Moments</span>
+        <span class="brand-tag">The Factory Outlet</span>
       </span>
     </a>
     <nav>
@@ -483,6 +494,7 @@
           <div id="gallery-flipbook">
             <!-- Cover Front -->
             <div class="fb-page cover-front">
+              <img src="logo.jpg" alt="Max Bakers" class="fb-logo">
               <span class="eyebrow" style="color:var(--gold);">Max Bakers</span>
               <h3>Celebration Lookbook</h3>
               <div class="script">Freshly Baked Gallery</div>
@@ -635,8 +647,8 @@
   <div class="container footer-grid">
     <div>
       <div class="brand">
-        <span class="brand-mark" style="color:#e5b277;border-color:#e5b277">MB</span>
-        <span><span class="brand-name" style="color:#fff">MAX BAKERS</span><span class="brand-tag">Baked for Your Moments</span></span>
+        <img src="logo.jpg" alt="Max Bakers Logo" class="brand-logo" style="border-color:#e5b277;">
+        <span><span class="brand-name" style="color:#fff">MAX BAKERS</span><span class="brand-tag">The Factory Outlet</span></span>
       </div>
       <p>From childhood birthdays to family milestones — one cake, one celebration, one memory at a time.</p>
     </div>
